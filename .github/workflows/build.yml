@@ -1,0 +1,33 @@
+name: Build Windows
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/build-native.cjs
+      - run: npm run check
+      - run: npm test
+      # Native mouse and Explorer tests need an interactive Windows desktop; run them locally.
+      - run: |
+          $env:TEMP = Join-Path $env:GITHUB_WORKSPACE 'test-results/build-temp'
+          $env:TMP = $env:TEMP
+          $env:ELECTRON_BUILDER_CACHE = Join-Path $env:GITHUB_WORKSPACE 'test-results/build-cache'
+          New-Item -ItemType Directory -Force -Path $env:TEMP | Out-Null
+          npm run build
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Glass-Island-Windows-x64
+          path: release/*.exe

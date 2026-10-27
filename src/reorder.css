@@ -1,0 +1,5 @@
+.sorting-icons,.sorting-icons *{cursor:grabbing!important;user-select:none!important}
+.sort-placeholder{opacity:.18!important}
+.sort-ghost{position:fixed!important;z-index:9999!important;pointer-events:none!important;margin:0!important;opacity:.95;transform:scale(1.06);color:#eef4f8;filter:drop-shadow(0 12px 14px #0006)}
+.application-card .app-launch,.app-shortcut{touch-action:none}
+.sort-ghost.app-shortcut .app-icon{width:48px;height:48px;display:grid;place-items:center}

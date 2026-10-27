@@ -1,0 +1,58 @@
+{
+  "name": "glass-island",
+  "productName": "Glass Island",
+  "version": "0.4.1",
+  "description": "璃屿 · 可编辑的 Windows 玻璃桌面组件",
+  "author": "Glass Island contributors",
+  "license": "MIT",
+  "main": "src/main.cjs",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "postinstall": "node node_modules/electron/install.js",
+    "prestart": "node scripts/build-native.cjs",
+    "start": "electron .",
+    "test": "node --test tests/model.test.mjs",
+    "pretest:ui": "node scripts/build-native.cjs",
+    "test:ui": "node tests/electron.mjs && node tests/applications.mjs && node tests/transparency-startup.mjs && node tests/icons.mjs && node tests/dock-interactions.mjs && node tests/desktop-interactions.mjs",
+    "check": "node scripts/check.mjs",
+    "build": "electron-builder --win portable --x64",
+    "prebuild": "node scripts/build-native.cjs",
+    "prebuild:dir": "node scripts/build-native.cjs",
+    "build:dir": "electron-builder --win --dir --x64"
+  },
+  "devDependencies": {
+    "electron": "45.0.0",
+    "electron-builder": "26.18.0",
+    "playwright": "^1.56.0"
+  },
+  "build": {
+    "appId": "io.glassisland.desktop",
+    "productName": "Glass Island",
+    "directories": {
+      "output": "release"
+    },
+    "electronDist": "node_modules/electron/dist",
+    "asarUnpack": [
+      "assets/windows-bridge.exe"
+    ],
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "LICENSE",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "icon": "assets/icon.ico",
+      "signExecutable": false
+    },
+    "portable": {
+      "artifactName": "Glass-Island-${version}-win-x64.exe",
+      "requestExecutionLevel": "user"
+    }
+  }
+}

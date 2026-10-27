@@ -1,0 +1,15 @@
+node_modules/
+release/
+test-results/
+*.log
+.DS_Store
+assets/windows-bridge.exe
+.env
+.env.*
+!.env.example
+layout.json
+layout.json.bak
+before-*.json
+docs/icons-fixed.png
+docs/applications.png
+docs/dock.png

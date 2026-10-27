@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>璃屿 · Glass Island</title><link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark" data-icon="island"></div><div><strong>璃屿<span>Glass Island</span></strong></div><span class="version">BETA</span></div>
+      <div class="nav-title">你的创作空间</div>
+      <button class="nav-item active" id="workspace-button"><span data-icon="grid"></span>桌面工作台<span class="nav-count" id="panel-count">4</span></button>
+      <button class="nav-item apps-navigation" id="launcher-button"><span data-icon="grid"></span>应用大面板<span class="shortcut-hint">⌘</span></button><div class="sidebar-heading"><span>我的面板</span><span id="visible-count"></span></div>
+      <div id="layers" class="layers"></div>
+      <div class="sidebar-heading components-heading"><span>添加组件</span><span data-icon="plus"></span></div>
+      <div id="library" class="library"></div>
+      <div class="sidebar-bottom"><label class="toggle-row startup-setting"><span>开机自启<small id="startup-hint">登录后只显示桌面组件</small></span><input id="startup-toggle" type="checkbox"><span class="switch"></span></label><div class="local-label"><span class="status-dot"></span>本地创作 · 自由开源</div><button id="help-button" class="nav-item"><span data-icon="help"></span>使用指南<span class="shortcut-hint">?</span></button><div class="sidebar-credit">给桌面一点呼吸感 <span>v0.4.1</span></div></div>
+    </aside>
+    <main class="main">
+      <header class="toolbar"><div class="breadcrumb">我的空间 <span>/</span> <strong>桌面工作台</strong></div><div class="toolbar-actions"><span id="save-status" class="save-status"><span data-icon="check"></span>自动保存</span><button id="import-button" class="button subtle"><span data-icon="upload"></span>导入</button><button id="export-button" class="button subtle"><span data-icon="download"></span>导出布局</button><button id="desktop-button" class="button primary"><span data-icon="monitor"></span><span id="desktop-label">显示到桌面</span></button></div></header>
+      <section class="workspace">
+        <div class="workspace-title"><div><div class="overline">MAKE ROOM FOR YOURSELF</div><h1>让软件，融入你的桌面<span>。</span></h1><p>软件 Dock、应用大面板与玻璃组件，自由组合成你的桌面。</p></div><span class="workspace-badge"><span class="status-dot"></span>实时预览</span></div>
+        <div class="scene-toolbar"><div class="scene-tabs"><span class="scene-label">场景</span><button class="scene-tab" id="desktop-scene"><i class="theme-dot system"></i>我的桌面</button><button class="scene-tab" data-theme="forest"><i class="theme-dot forest"></i>雾野</button><button class="scene-tab" data-theme="dusk"><i class="theme-dot dusk"></i>暮色</button><button class="scene-tab" data-theme="ocean"><i class="theme-dot ocean"></i>深海</button></div><button id="wallpaper-button" class="button subtle small"><span data-icon="image"></span>预览壁纸</button></div>
+        <div class="canvas-wrap"><div id="canvas" class="canvas forest" aria-label="桌面布局编辑画布"><div class="landscape"></div><div class="scene-caption"><span>GLASS ISLAND</span><span>A LITTLE SPACE. A BETTER DAY.</span></div><div id="panels"></div></div><div id="empty-state" class="empty-state" hidden>从左侧添加一个组件，开始你的创作。</div></div>
+        <div class="canvas-footer"><span><span data-icon="cursor"></span>拖动面板移动位置 · 拖动右下角调整大小</span><span>设计画布 1440 × 900 <span class="footer-separator">|</span> <span id="zoom-label">50%</span></span></div>
+        <div class="workspace-bottom"><div class="tip-icon" data-icon="sparkle"></div><div><strong>让每一块玻璃，都有你的样子。</strong><p>选中面板，在右侧调整材质和内容。准备好后，一键放到桌面。</p></div><button id="guide-button" class="text-button">看看怎么用 <span data-icon="arrow"></span></button></div>
+      </section>
+      <footer class="app-footer"><span><span class="status-dot"></span><span id="material-status">玻璃渲染已就绪</span></span><span>专属于你的桌面，始于一块玻璃。</span><button id="data-button" class="text-button">本地数据 <span data-icon="folder"></span></button></footer>
+    </main>
+    <aside class="inspector"><div class="inspector-header"><span data-icon="settings"></span><strong>面板属性</strong><span class="inspector-number">01</span></div><div id="inspector" class="inspector-content"></div></aside>
+  </div>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <dialog id="help-dialog"><div class="dialog-heading"><div><div class="overline">WELCOME TO YOUR ISLAND</div><h2>从一块玻璃开始。</h2></div><button class="icon-button" id="help-close" aria-label="关闭指南"><span data-icon="close"></span></button></div><div class="guide-steps"><div><b>01</b><section><h3>导入你自己的软件</h3><p>从“应用大面板”读取桌面或开始菜单，勾选想添加的软件；也可以直接拖入 EXE 或 LNK 快捷方式。</p></section></div><div><b>02</b><section><h3>分组整理，固定到 Dock</h3><p>在应用卡片上点击图钉，将软件固定到 Dock。右键编辑名称和分组；搜索后按 Enter 启动首个匹配入口。</p></section></div><div><b>03</b><section><h3>把灵感放到桌面</h3><p>点击“显示到桌面”，再按喜好添加时钟、便签等玻璃组件。拖动顶部移动、边缘缩放，属性栏调整玻璃材质。</p></section></div></div><div class="shortcut-list"><div><span>应用大面板</span><kbd>Ctrl + Shift + Space</kbd></div><div><span>打开编辑器</span><kbd>Ctrl + Shift + G</kbd></div><div><span>鼠标穿透 / 恢复交互</span><kbd>Ctrl + Shift + L</kbd></div><div><span>显示 / 隐藏全部面板</span><kbd>Ctrl + Shift + H</kbd></div></div><p class="guide-note">面板以独立窗口显示，可设为置顶。关闭编辑器后可从托盘找回。预览壁纸仅用于排版，不会更改系统壁纸；选择“全透明”可只保留文字与图标；清透模式保留淡淡的玻璃边缘。非置顶组件绑定 Windows 桌面所有者，桌面切换表现仍取决于 Explorer 和系统版本。</p><button class="button primary guide-done" id="help-done">开始创作 <span data-icon="arrow"></span></button></dialog>
+  <script type="module" src="./editor.mjs"></script>
+</body></html>

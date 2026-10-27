@@ -1,0 +1,11 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const { spawnSync } = require('node:child_process');
+if (process.platform !== 'win32') process.exit(0);
+const source = path.resolve('src/native/WindowsBridge.cs');
+const output = path.resolve('assets/windows-bridge.exe');
+if (fs.existsSync(output) && fs.statSync(output).mtimeMs >= fs.statSync(source).mtimeMs) process.exit(0);
+const compiler = path.join(process.env.SystemRoot || 'C:\\Windows', 'Microsoft.NET/Framework64/v4.0.30319/csc.exe');
+const result = spawnSync(compiler, ['/nologo', '/optimize+', '/target:exe', '/platform:x64', '/reference:System.Web.Extensions.dll', '/reference:System.Drawing.dll', '/reference:Microsoft.CSharp.dll', `/out:${output}`, source], { stdio: 'inherit', windowsHide: true });
+if (result.error) console.error('编译桌面桥接程序失败，需要 Windows .NET Framework 4.8：', result.error.message);
+process.exit(result.status ?? 1);
